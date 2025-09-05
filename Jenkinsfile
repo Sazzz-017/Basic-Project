@@ -23,10 +23,10 @@ pipeline {
             }
         }
 
-        stage('Run') {
+        stage('Archive') {
             steps {
-                sh 'echo Starting Spring Boot app...'
-                sh 'java -jar target/*.jar &'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                junit 'target/surefire-reports/*.xml'
             }
         }
     }
